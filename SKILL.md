@@ -40,22 +40,22 @@ SKILL=./datasuite-studio-bridge
 
 # Save SQL text to a Data Studio asset.
 printf 'select 3;' > /tmp/query.sql
-$SKILL/scripts/ds_studio_bridge.sh save-sql 11872628 /tmp/query.sql
+bash "$SKILL/scripts/ds_studio_bridge.sh" save-sql 11872628 /tmp/query.sql
 
 # Run SQL and get an executionId.
-$SKILL/scripts/ds_studio_bridge.sh run-sql 11872628 /tmp/query.sql
+bash "$SKILL/scripts/ds_studio_bridge.sh" run-sql 11872628 /tmp/query.sql
 
 # Fetch log/result by executionId.
-$SKILL/scripts/ds_studio_bridge.sh log 71887183
-$SKILL/scripts/ds_studio_bridge.sh result 71887183
+bash "$SKILL/scripts/ds_studio_bridge.sh" log 71887183
+bash "$SKILL/scripts/ds_studio_bridge.sh" result 71887183
 ```
 
 For Scheduler/output/property controls, inspect visible controls before acting:
 
 ```bash
-$SKILL/scripts/ds_studio_bridge.sh inspect-ui output
-$SKILL/scripts/ds_studio_bridge.sh open-settings output
-$SKILL/scripts/ds_studio_bridge.sh open-settings properties
+bash "$SKILL/scripts/ds_studio_bridge.sh" inspect-ui output
+bash "$SKILL/scripts/ds_studio_bridge.sh" open-settings output
+bash "$SKILL/scripts/ds_studio_bridge.sh" open-settings properties
 ```
 
 ## Creating A Temp Query
@@ -63,13 +63,13 @@ $SKILL/scripts/ds_studio_bridge.sh open-settings properties
 To create a new adhoc query tab, click the Data Studio `+` button through the bridge rather than using mouse automation:
 
 ```bash
-$SKILL/scripts/ds_studio_bridge.sh create-temp
+bash "$SKILL/scripts/ds_studio_bridge.sh" create-temp
 ```
 
 Then list temp tabs and use the newest `assetId`:
 
 ```bash
-$SKILL/scripts/ds_studio_bridge.sh temp-tabs
+bash "$SKILL/scripts/ds_studio_bridge.sh" temp-tabs
 ```
 
 Validated behavior: creating `Temp_Query_3` produced `assetId=11872628`.
@@ -217,19 +217,19 @@ Scheduler entry depends on asset type:
 To enter Scheduler from the active Data Studio task tab, compute the Scheduler URL and open it through the Chrome bridge.
 
 ```bash
-$SKILL/scripts/ds_studio_bridge.sh scheduler-url
-$SKILL/scripts/ds_studio_bridge.sh enter-scheduler
+bash "$SKILL/scripts/ds_studio_bridge.sh" scheduler-url
+bash "$SKILL/scripts/ds_studio_bridge.sh" enter-scheduler
 ```
 
 If a task code or asset ID is already known, navigate directly to Scheduler. The optional environment is `prod`, `staging`, or `dev`; use `prod` unless the user explicitly asks otherwise.
 
 ```bash
-$SKILL/scripts/ds_studio_bridge.sh enter-scheduler example_project.studio_9877176 manual
-$SKILL/scripts/ds_studio_bridge.sh enter-scheduler 9877176 manual
-$SKILL/scripts/ds_studio_bridge.sh enter-scheduler example_project.studio_5383431 scheduled prod
-$SKILL/scripts/ds_studio_bridge.sh enter-scheduler example_project_5936046 workflow prod
-$SKILL/scripts/ds_studio_bridge.sh enter-scheduler example_project.studio_5383431 scheduled staging
-$SKILL/scripts/ds_studio_bridge.sh enter-scheduler example_project.studio_5383431 scheduled dev
+bash "$SKILL/scripts/ds_studio_bridge.sh" enter-scheduler example_project.studio_9877176 manual
+bash "$SKILL/scripts/ds_studio_bridge.sh" enter-scheduler 9877176 manual
+bash "$SKILL/scripts/ds_studio_bridge.sh" enter-scheduler example_project.studio_5383431 scheduled prod
+bash "$SKILL/scripts/ds_studio_bridge.sh" enter-scheduler example_project_5936046 workflow prod
+bash "$SKILL/scripts/ds_studio_bridge.sh" enter-scheduler example_project.studio_5383431 scheduled staging
+bash "$SKILL/scripts/ds_studio_bridge.sh" enter-scheduler example_project.studio_5383431 scheduled dev
 ```
 
 Observed environment URL prefixes:
@@ -257,9 +257,9 @@ After opening Scheduler, point generic bridge commands at the Scheduler tab:
 
 ```bash
 export DS_URL_CONTAINS='datasuite.example.com/scheduler'
-$SKILL/scripts/ds_studio_bridge.sh inspect-ui 'Output Config'
-$SKILL/scripts/ds_studio_bridge.sh click-text 'Output Config' '.ant-tabs-tab'
-$SKILL/scripts/ds_studio_bridge.sh inspect-ui 'Operate'
+bash "$SKILL/scripts/ds_studio_bridge.sh" inspect-ui 'Output Config'
+bash "$SKILL/scripts/ds_studio_bridge.sh" click-text 'Output Config' '.ant-tabs-tab'
+bash "$SKILL/scripts/ds_studio_bridge.sh" inspect-ui 'Operate'
 ```
 
 Backfill rule:
@@ -272,8 +272,8 @@ Check or open Backfill on a Scheduler page:
 
 ```bash
 export DS_URL_CONTAINS='datasuite.example.com/scheduler'
-$SKILL/scripts/ds_studio_bridge.sh scheduler-backfill check
-$SKILL/scripts/ds_studio_bridge.sh scheduler-backfill open
+bash "$SKILL/scripts/ds_studio_bridge.sh" scheduler-backfill check
+bash "$SKILL/scripts/ds_studio_bridge.sh" scheduler-backfill open
 ```
 
 Validated example: active Data Studio task `example_scheduled_task` resolved to PROD Scheduler URL:
@@ -289,31 +289,31 @@ Use the Data Output Setting panel for adding/editing output tasks such as Google
 Start with inspection:
 
 ```bash
-$SKILL/scripts/ds_studio_bridge.sh open-settings output
-$SKILL/scripts/ds_studio_bridge.sh inspect-ui output
+bash "$SKILL/scripts/ds_studio_bridge.sh" open-settings output
+bash "$SKILL/scripts/ds_studio_bridge.sh" inspect-ui output
 ```
 
 Add a draft output config:
 
 ```bash
-DS_CONFIRM=1 $SKILL/scripts/ds_studio_bridge.sh output-new gsheet
-DS_CONFIRM=1 $SKILL/scripts/ds_studio_bridge.sh output-new csv
+DS_CONFIRM=1 bash "$SKILL/scripts/ds_studio_bridge.sh" output-new gsheet
+DS_CONFIRM=1 bash "$SKILL/scripts/ds_studio_bridge.sh" output-new csv
 ```
 
 After the output config form opens, inspect it and fill fields by label:
 
 ```bash
-$SKILL/scripts/ds_studio_bridge.sh inspect-ui
-$SKILL/scripts/ds_studio_bridge.sh set-field-by-label 'Output name' 'seller_review_output'
-$SKILL/scripts/ds_studio_bridge.sh set-field-by-label 'Google Sheet URL' 'https://docs.google.com/spreadsheets/d/.../edit'
+bash "$SKILL/scripts/ds_studio_bridge.sh" inspect-ui
+bash "$SKILL/scripts/ds_studio_bridge.sh" set-field-by-label 'Output name' 'seller_review_output'
+bash "$SKILL/scripts/ds_studio_bridge.sh" set-field-by-label 'Google Sheet URL' 'https://docs.google.com/spreadsheets/d/.../edit'
 ```
 
 For existing output tasks, select the output row/checkbox first, then toggle or delete:
 
 ```bash
-DS_CONFIRM=1 $SKILL/scripts/ds_studio_bridge.sh output-action turn-off
-DS_CONFIRM=1 $SKILL/scripts/ds_studio_bridge.sh output-action turn-on
-DS_CONFIRM=1 $SKILL/scripts/ds_studio_bridge.sh output-action delete
+DS_CONFIRM=1 bash "$SKILL/scripts/ds_studio_bridge.sh" output-action turn-off
+DS_CONFIRM=1 bash "$SKILL/scripts/ds_studio_bridge.sh" output-action turn-on
+DS_CONFIRM=1 bash "$SKILL/scripts/ds_studio_bridge.sh" output-action delete
 ```
 
 Observed Add New Output modal: destination options are `Google Sheet` and `CSV`; radio values observed in the DOM were Google Sheet=`3` and CSV=`1`.
@@ -323,19 +323,19 @@ Observed Add New Output modal: destination options are `Google Sheet` and `CSV`;
 Use the Properties Setting panel for output markers, input markers, frequency, run time, and repetition.
 
 ```bash
-$SKILL/scripts/ds_studio_bridge.sh open-settings properties
-$SKILL/scripts/ds_studio_bridge.sh inspect-ui frequency
+bash "$SKILL/scripts/ds_studio_bridge.sh" open-settings properties
+bash "$SKILL/scripts/ds_studio_bridge.sh" inspect-ui frequency
 ```
 
 Common bridge actions:
 
 ```bash
-$SKILL/scripts/ds_studio_bridge.sh select-by-label 'Frequency' 'DAILY'
-$SKILL/scripts/ds_studio_bridge.sh set-field-by-label 'Run at' '00:01'
-$SKILL/scripts/ds_studio_bridge.sh set-field-by-label 'Repeat On' 'Everyday'
-DS_CONFIRM=1 $SKILL/scripts/ds_studio_bridge.sh click-text 'Auto Parse'
-DS_CONFIRM=1 $SKILL/scripts/ds_studio_bridge.sh click-text 'Delete Markers'
-DS_CONFIRM=1 $SKILL/scripts/ds_studio_bridge.sh click-text 'Add Partitions'
+bash "$SKILL/scripts/ds_studio_bridge.sh" select-by-label 'Frequency' 'DAILY'
+bash "$SKILL/scripts/ds_studio_bridge.sh" set-field-by-label 'Run at' '00:01'
+bash "$SKILL/scripts/ds_studio_bridge.sh" set-field-by-label 'Repeat On' 'Everyday'
+DS_CONFIRM=1 bash "$SKILL/scripts/ds_studio_bridge.sh" click-text 'Auto Parse'
+DS_CONFIRM=1 bash "$SKILL/scripts/ds_studio_bridge.sh" click-text 'Delete Markers'
+DS_CONFIRM=1 bash "$SKILL/scripts/ds_studio_bridge.sh" click-text 'Add Partitions'
 ```
 
 Known sections include Task Information, Schedule, Dependencies & Input Marker, Output Markers, Execution Settings, Alarm and Time Out Settings, Email Upon Successful Completion, and Data Quality Check.
@@ -367,7 +367,7 @@ export GSHEET_OAUTH_JSON=/path/to/oauth_authorized_user.json
 export GSHEET_SPREADSHEET_ID=your_spreadsheet_id
 export GSHEET_SHEET_NAME=ds_studio_log
 
-$SKILL/scripts/append_gsheet_audit.py \
+python3 "$SKILL/scripts/append_gsheet_audit.py" \
   --row-json '{"action":"run_sql","asset_id":"11872628","sql":"select 3;","execution_id":"71887183","status":"20","row_count":"1","result_preview":"_col0=3"}'
 ```
 
