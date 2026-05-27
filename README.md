@@ -4,6 +4,24 @@ Codex skill for fast browser-bridge automation of a DataSuite-style Data Studio 
 
 The public version is sanitized: company domains, project codes, user accounts, and task IDs are examples. Configure your own environment before use.
 
+## Install
+
+Install directly into Codex skills:
+
+```bash
+CODEX_SKILLS_DIR="${CODEX_HOME:-$HOME/.codex}/skills"
+mkdir -p "$CODEX_SKILLS_DIR"
+git clone https://github.com/rogertu-rgb/datasuite-studio-bridge.git "$CODEX_SKILLS_DIR/datasuite-studio-bridge"
+```
+
+Restart Codex after installing so the new skill is loaded.
+
+To update later:
+
+```bash
+git -C "${CODEX_HOME:-$HOME/.codex}/skills/datasuite-studio-bridge" pull --ff-only
+```
+
 ## Configure
 
 ```bash
