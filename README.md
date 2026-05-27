@@ -23,11 +23,11 @@ export DS_URL_CONTAINS='datasuite.example.com/scheduler'
 ```bash
 SKILL=/path/to/datasuite-studio-bridge
 
-$SKILL/scripts/ds_studio_bridge.sh temp-tabs
-$SKILL/scripts/ds_studio_bridge.sh save-sql 123456 /tmp/query.sql
-$SKILL/scripts/ds_studio_bridge.sh run-sql 123456 /tmp/query.sql
-$SKILL/scripts/ds_studio_bridge.sh scheduler-url your_project_code.studio_123456 scheduled prod
-$SKILL/scripts/ds_studio_bridge.sh scheduler-backfill check
+bash "$SKILL/scripts/ds_studio_bridge.sh" temp-tabs
+bash "$SKILL/scripts/ds_studio_bridge.sh" save-sql 123456 /tmp/query.sql
+bash "$SKILL/scripts/ds_studio_bridge.sh" run-sql 123456 /tmp/query.sql
+bash "$SKILL/scripts/ds_studio_bridge.sh" scheduler-url your_project_code.studio_123456 scheduled prod
+bash "$SKILL/scripts/ds_studio_bridge.sh" scheduler-backfill check
 ```
 
 See [SKILL.md](SKILL.md) for the full workflow.
