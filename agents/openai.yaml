@@ -1,0 +1,4 @@
+interface:
+  display_name: "DataSuite Studio Bridge"
+  short_description: "Fast Data Studio and Scheduler automation"
+  default_prompt: "Use $datasuite-studio-bridge to run Data Studio SQL or configure Scheduler/output/property settings, then return the execution log, result, and audit details."
